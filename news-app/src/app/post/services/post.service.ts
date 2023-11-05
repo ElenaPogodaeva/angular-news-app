@@ -1,13 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { responseMock } from 'src/app/mocks/response.mock';
-import { PostModel } from 'src/app/models/post.model';
+import { Injectable } from '@angular/core';
+import { PostModel } from '../models/post.model';
+import { responseMock } from '../mocks/response.mock';
 
-@Component({
-  selector: 'app-post-list',
-  templateUrl: './post-list.component.html',
-  styleUrls: ['./post-list.component.scss'],
+@Injectable({
+  providedIn: 'root',
 })
-export class PostListComponent implements OnInit {
+export class PostService {
   public posts: PostModel[] = responseMock;
 
   likePost(targetPost: PostModel) {
@@ -27,6 +25,4 @@ export class PostListComponent implements OnInit {
   }
 
   constructor() {}
-
-  ngOnInit(): void {}
 }
