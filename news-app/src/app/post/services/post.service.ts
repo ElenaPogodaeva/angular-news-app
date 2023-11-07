@@ -8,6 +8,8 @@ import { responseMock } from '../mocks/response.mock';
 export class PostService {
   public posts: PostModel[] = responseMock;
 
+  public selectedPost?: PostModel;
+
   likePost(targetPost: PostModel) {
     const postIdx = this.posts.findIndex((post) => post.id === targetPost.id);
     this.posts[postIdx].isLiked = true;
@@ -22,6 +24,10 @@ export class PostService {
 
   handleLike(targetPost: PostModel) {
     targetPost.isLiked ? this.unlikePost(targetPost) : this.likePost(targetPost);
+  }
+
+  selectPost(targetPost: PostModel) {
+    this.selectedPost = targetPost;
   }
 
   constructor() {}

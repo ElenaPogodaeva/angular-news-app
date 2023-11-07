@@ -1,6 +1,6 @@
 <div class="card" *ngIf="post">
   <div class="card-body">
-    <h5 class="card-title">{{post.title}}</h5>
+    <h5 class="card-title" (click)="onSelect(post)">{{post.title}}</h5>
     <p class="card-text mb-2">{{post.body}}</p>
   </div>
   <div class="card-footer text-muted">

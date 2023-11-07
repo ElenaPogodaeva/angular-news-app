@@ -1,5 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { PostModel } from 'src/app/post/models/post.model';
+import { Router } from '@angular/router';
+import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-post-item',
@@ -11,10 +13,18 @@ export class PostItemComponent implements OnInit {
 
   @Output() public like: EventEmitter<PostModel> = new EventEmitter();
 
-  constructor() {}
+  constructor(
+    private postService: PostService,
+    private router: Router,
+  ) {}
 
   onLike() {
     this.like.emit(this.post);
+  }
+
+  onSelect(targetPost: PostModel) {
+    this.postService.selectPost(targetPost);
+    this.router.navigate(['/', 'posts', targetPost.id]);
   }
 
   ngOnInit(): void {}
