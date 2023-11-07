@@ -1,0 +1,11 @@
+<div class="card-container" *ngIf="selectedPost">
+  <button type="button" class="btn btn-light" (click)="onBack()">
+    <i class="bi bi-arrow-left"></i>
+  </button>
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{selectedPost.title}}</h5>
+      <p class="card-text mb-2">{{selectedPost.body}}</p>
+    </div>
+  </div>
+</div>
