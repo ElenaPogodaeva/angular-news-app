@@ -13,18 +13,10 @@ export class PostListComponent implements OnInit {
   constructor(private postService: PostService) {}
 
   ngOnInit(): void {
-    this.posts = this.postService.posts;
+    this.getPosts();
   }
 
-  likePost(targetPost: PostModel) {
-    this.postService.likePost(targetPost);
-  }
-
-  unlikePost(targetPost: PostModel) {
-    this.postService.unlikePost(targetPost);
-  }
-
-  handleLike(targetPost: PostModel) {
-    this.postService.handleLike(targetPost);
+  getPosts() {
+    this.postService.getPosts().subscribe((posts) => (this.posts = posts));
   }
 }

@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { PostModel } from '../../models/post.model';
 import { PostService } from '../../services/post.service';
 
@@ -9,18 +10,24 @@ import { PostService } from '../../services/post.service';
   styleUrls: ['./detailed-page.component.scss'],
 })
 export class DetailedPageComponent implements OnInit {
-  @Input() public selectedPost?: PostModel;
+  public selectedPost?: PostModel;
 
   constructor(
+    private route: ActivatedRoute,
     private postService: PostService,
-    private router: Router,
+    private location: Location,
   ) {}
 
   ngOnInit(): void {
-    this.selectedPost = this.postService.selectedPost;
+    this.getPost();
+  }
+
+  getPost() {
+    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
+    this.postService.getPost(id).subscribe((post) => (this.selectedPost = post));
   }
 
   onBack() {
-    this.router.navigate(['/', 'posts']);
+    this.location.back();
   }
 }
