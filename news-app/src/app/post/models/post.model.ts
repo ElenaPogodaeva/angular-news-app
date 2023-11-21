@@ -6,3 +6,8 @@ export interface PostModel {
   isLiked: boolean;
   likes: number;
 }
+
+export interface PostResponseModel {
+  posts: PostModel[];
+  hasMorePosts: boolean;
+}

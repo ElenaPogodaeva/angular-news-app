@@ -1,0 +1,17 @@
+<div class="input-group input-group-sm mb-3">
+  <input type="search" [formControl]="searchInput" name="searchCriteria" class="form-control"
+    placeholder="Название поста">
+  <button type="submit" class="btn btn-success btn-sm">
+    Найти
+  </button>
+</div>
+<ng-container *ngIf="posts && posts.length; else noData">
+  <div class="row g-3 mb-3" *ngIf="posts.length; else noData">
+    <app-post-item class="col-lg-3 col-md-4 col-sm-6 col-12" *ngFor="let post of posts" [post]="post"></app-post-item>
+  </div>
+  <button (click)="loadMorePosts()" class="btn btn-success btn-load" *ngIf="hasMorePosts">Load more</button>
+</ng-container>
+
+<ng-template #noData>
+  <div class="text-center">No Posts</div>
+</ng-template>
