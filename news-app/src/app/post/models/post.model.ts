@@ -11,3 +11,11 @@ export interface PostResponseModel {
   posts: PostModel[];
   hasMorePosts: boolean;
 }
+
+export interface CommentModel {
+  postId: number;
+  id: number;
+  name: string;
+  email: string;
+  body: string;
+}

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { EMPTY, Observable, catchError, map } from 'rxjs';
-import { PostModel, PostResponseModel } from '../models/post.model';
+import { CommentModel, PostModel, PostResponseModel } from '../models/post.model';
 
 @Injectable({
   providedIn: 'root',
@@ -39,6 +39,16 @@ export class PostService {
   getPost(id: number): Observable<PostModel> {
     const url = `${this.POST_URL}/${id}`;
     return this.http.get<PostModel>(url).pipe(
+      catchError((error) => {
+        console.log('ERROR', error);
+        return EMPTY;
+      }),
+    );
+  }
+
+  getComments(id: number): Observable<CommentModel[]> {
+    const url = `${this.POST_URL}/${id}/comments`;
+    return this.http.get<CommentModel[]>(url).pipe(
       catchError((error) => {
         console.log('ERROR', error);
         return EMPTY;

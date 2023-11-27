@@ -5,3 +5,10 @@
     align-self: flex-start;
   }
 }
+
+app-comment {
+  border-bottom: 1px solid #ccc;
+}
+app-comment:last-child {
+  border-bottom: none;
+}
