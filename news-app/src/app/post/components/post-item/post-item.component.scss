@@ -1,0 +1,31 @@
+.card {
+  height: 300px;
+}
+
+.card-body {
+  overflow: hidden;
+}
+
+.card-text {
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.list-comments {
+  height: 300px;
+  overflow: auto;
+}
+
+.user-icon {
+  margin-bottom: 0.5rem;
+  fill: #888;
+}
