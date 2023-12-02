@@ -7,9 +7,16 @@ import { PostItemComponent } from './components/post-item/post-item.component';
 import { DetailedPageComponent } from './pages/detailed-page/detailed-page.component';
 import { PostListPageComponent } from './pages/post-list-page/post-list-page.component';
 import { CommentComponent } from './components/comment/comment.component';
+import { UserPageComponent } from './pages/user-page/user-page.component';
 
 @NgModule({
-  declarations: [PostItemComponent, DetailedPageComponent, PostListPageComponent, CommentComponent],
+  declarations: [
+    PostItemComponent,
+    DetailedPageComponent,
+    PostListPageComponent,
+    CommentComponent,
+    UserPageComponent,
+  ],
   imports: [CommonModule, ReactiveFormsModule, PostRoutingModule],
   exports: [DetailedPageComponent],
 })

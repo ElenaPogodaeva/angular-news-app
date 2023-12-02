@@ -1,0 +1,40 @@
+<div class="card-container" *ngIf="user">
+  <button type="button" class="btn btn-light" (click)="onBack()">
+    <i class="bi bi-arrow-left"></i>
+  </button>
+  <div class="card" style="width: 15rem;">
+    <div class="card-body">
+      <h5 class="card-title text-muted">{{user.name}}</h5>
+      <p class="card-text">
+        <span class="fst-italic">email: </span>
+        <span class="fw-bold">{{user.email}}</span>
+      </p>
+      <p class="card-text">
+        <span class="fst-italic">city: </span>
+        <span class="fw-bold">{{user.address.city}}</span>
+      </p>
+      <p class="card-text">
+        <span class="fst-italic">phone: </span>
+        <span class="fw-bold">{{user.phone}}</span>
+      </p>
+      <p class="card-text">
+        <span class="fst-italic">website: </span>
+        <span class="fw-bold">{{user.website}}</span>
+      </p>
+      <p class="card-text">
+        <span class="fst-italic">company: </span>
+        <span class="fw-bold">{{user.company.name}}</span>
+      </p>
+    </div>
+  </div>
+</div>
+<h4 class="text-center mb-3">Публикации</h4>
+<ng-container *ngIf="posts && posts.length; else noData">
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-3" *ngIf="posts.length; else noData">
+    <app-post-item class="col" *ngFor="let post of posts" [post]="post"></app-post-item>
+  </div>
+</ng-container>
+
+<ng-template #noData>
+  <div class="text-center">No Posts</div>
+</ng-template>
