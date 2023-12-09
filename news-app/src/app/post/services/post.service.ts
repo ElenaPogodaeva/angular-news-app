@@ -9,7 +9,9 @@ import { CommentModel, PostModel, PostResponseModel, UserModel } from '../models
 export class PostService {
   public selectedPost?: PostModel;
 
-  private readonly POST_URL = 'https://jsonplaceholder.typicode.com';
+  private readonly POST_URL = 'posts';
+
+  private readonly USERS_URL = 'users';
 
   private readonly LIMIT = 10;
 
@@ -24,9 +26,7 @@ export class PostService {
       params = params.append('title_like', searchCriteria);
     }
 
-    const url = `${this.POST_URL}/posts`;
-
-    return this.http.get<PostModel[]>(url, { params }).pipe(
+    return this.http.get<PostModel[]>(this.POST_URL, { params }).pipe(
       map((posts) => ({
         posts,
         hasMorePosts: posts.length === this.LIMIT,
@@ -39,7 +39,7 @@ export class PostService {
   }
 
   getPost(id: number): Observable<PostModel> {
-    const url = `${this.POST_URL}/posts/${id}`;
+    const url = `${this.POST_URL}/${id}`;
     return this.http.get<PostModel>(url).pipe(
       catchError((error) => {
         console.log('ERROR', error);
@@ -49,7 +49,7 @@ export class PostService {
   }
 
   getComments(id: number): Observable<CommentModel[]> {
-    const url = `${this.POST_URL}/posts/${id}/comments`;
+    const url = `${this.POST_URL}/${id}/comments`;
     return this.http.get<CommentModel[]>(url).pipe(
       catchError((error) => {
         console.log('ERROR', error);
@@ -59,7 +59,7 @@ export class PostService {
   }
 
   getUser(id: number): Observable<UserModel> {
-    const url = `${this.POST_URL}/users/${id}`;
+    const url = `${this.USERS_URL}/${id}`;
     return this.http.get<UserModel>(url).pipe(
       catchError((error) => {
         console.log('ERROR', error);
@@ -69,7 +69,7 @@ export class PostService {
   }
 
   getUserPosts(id: number): Observable<PostModel[]> {
-    const url = `${this.POST_URL}/users/${id}/posts`;
+    const url = `${this.USERS_URL}/${id}/posts`;
     return this.http.get<PostModel[]>(url).pipe(
       catchError((error) => {
         console.log('ERROR', error);
