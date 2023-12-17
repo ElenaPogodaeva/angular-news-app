@@ -5,11 +5,12 @@ import { HeaderComponent } from './components/header/header.component';
 import { SharedModule } from '../shared/shared.module';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { ApiInterceptor } from './interceptors/api.interceptor';
+import { LoaderComponent } from './components/loader/loader.component';
 
 @NgModule({
-  declarations: [HeaderComponent, NotFoundPageComponent],
+  declarations: [HeaderComponent, NotFoundPageComponent, LoaderComponent],
   imports: [CommonModule, SharedModule, HttpClientModule],
-  exports: [HeaderComponent],
+  exports: [HeaderComponent, LoaderComponent],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,

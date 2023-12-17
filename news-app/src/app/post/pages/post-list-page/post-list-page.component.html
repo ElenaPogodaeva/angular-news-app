@@ -5,7 +5,7 @@
     Найти
   </button>
 </div>
-<ng-container *ngIf="posts && posts.length; else noData">
+<ng-container *ngIf="posts; else noData">
   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-3" *ngIf="posts.length; else noData">
     <app-post-item class="col" *ngFor="let post of posts" [post]="post"></app-post-item>
   </div>

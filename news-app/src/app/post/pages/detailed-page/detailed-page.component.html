@@ -11,7 +11,7 @@
       <button class="btn btn-outline-info btn-sm" (click)="showComments=!showComments">
         Комментарии
       </button>
-      <ng-container *ngIf="showComments && comments && comments.length">
+      <ng-container *ngIf="showComments && comments">
         <ul class="list-group list-group-flush" *ngIf="comments.length; else noData">
           <app-comment *ngFor="let comment of comments" [comment]="comment"></app-comment>
         </ul>
