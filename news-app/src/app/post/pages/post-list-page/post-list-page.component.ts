@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, debounceTime, filter } from 'rxjs';
 import { FormControl } from '@angular/forms';
-import { PostModel } from '../../models/post.model';
-import { PostService } from '../../services/post.service';
+import { Store } from '@ngrx/store';
+import { getHasMorePosts, getPosts } from '../../reducers/post.reducer';
+import { loadMorePostsAction, loadPostsAction } from '../../actions/post.actions';
 
 @Component({
   selector: 'app-post-list-page',
@@ -10,20 +11,18 @@ import { PostService } from '../../services/post.service';
   styleUrls: ['./post-list-page.component.scss'],
 })
 export class PostListPageComponent implements OnInit {
-  public posts: PostModel[] = [];
+  public posts$ = this.store.select(getPosts);
+
+  public hasMorePosts$ = this.store.select(getHasMorePosts);
 
   public searchInput = new FormControl();
 
-  public hasMorePosts: boolean = false;
-
-  public currentPage = 1;
-
   private debounceSubject = new Subject<string>();
 
-  constructor(private postService: PostService) {}
+  constructor(private store: Store) {}
 
   ngOnInit(): void {
-    this.initPosts();
+    this.loadPosts();
 
     this.debounceSubject
       .pipe(
@@ -31,28 +30,17 @@ export class PostListPageComponent implements OnInit {
         debounceTime(1000),
       )
       .subscribe(() => {
-        this.initPosts();
+        this.loadPosts();
       });
 
     this.searchInput.valueChanges.subscribe((value) => this.debounceSubject.next(value));
   }
 
-  initPosts() {
-    this.currentPage = 1;
-    this.loadPosts();
-  }
-
   loadPosts() {
-    this.postService
-      .getPosts(this.currentPage, this.searchInput.value)
-      .subscribe(({ posts, hasMorePosts }) => {
-        this.posts = this.currentPage > 1 ? this.posts.concat(posts) : posts;
-        this.hasMorePosts = hasMorePosts;
-      });
+    this.store.dispatch(loadPostsAction({ searchCriteria: this.searchInput.value }));
   }
 
   loadMorePosts() {
-    this.currentPage += 1;
-    this.loadPosts();
+    this.store.dispatch(loadMorePostsAction());
   }
 }
