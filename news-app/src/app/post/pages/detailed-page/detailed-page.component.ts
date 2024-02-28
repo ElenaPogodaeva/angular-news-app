@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { CommentModel, PostModel } from '../../models/post.model';
-import { PostService } from '../../services/post.service';
 
 @Component({
   selector: 'app-detailed-page',
@@ -18,25 +17,12 @@ export class DetailedPageComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private postService: PostService,
     private location: Location,
   ) {}
 
   ngOnInit(): void {
-    this.getPost();
-    this.loadComments();
-  }
-
-  loadComments() {
-    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.postService.getComments(id).subscribe((comments) => {
-      this.comments = comments;
-    });
-  }
-
-  getPost() {
-    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    this.postService.getPost(id).subscribe((post) => (this.selectedPost = post));
+    this.selectedPost = this.route.snapshot.data['post'];
+    this.comments = this.route.snapshot.data['comments'];
   }
 
   onBack() {

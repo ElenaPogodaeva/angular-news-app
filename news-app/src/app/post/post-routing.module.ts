@@ -3,6 +3,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { DetailedPageComponent } from './pages/detailed-page/detailed-page.component';
 import { PostListPageComponent } from './pages/post-list-page/post-list-page.component';
 import { UserPageComponent } from './pages/user-page/user-page.component';
+import { PostResolver } from './resolvers/post.resolver';
+import { CommentsResolver } from './resolvers/comments.resolver';
+import { UserResolver } from './resolvers/user.resolver';
 
 const routes: Routes = [
   {
@@ -12,10 +15,17 @@ const routes: Routes = [
   {
     path: ':id',
     component: DetailedPageComponent,
+    resolve: {
+      post: PostResolver,
+      comments: CommentsResolver,
+    },
   },
   {
     path: 'users/:id',
     component: UserPageComponent,
+    resolve: {
+      user: UserResolver,
+    },
   },
 ];
 
