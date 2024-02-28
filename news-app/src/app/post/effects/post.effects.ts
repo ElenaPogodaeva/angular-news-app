@@ -43,7 +43,7 @@ export class PostEffects {
           })),
         ),
       ),
-      switchMap(([action, { page, searchCriteria }]) =>
+      switchMap(([, { page, searchCriteria }]) =>
         this.postService.getPosts(page, searchCriteria).pipe(
           map((posts) => appendPostsAction({ payload: posts })),
           catchError(() => of(appendPostsAction({ payload: null }))),

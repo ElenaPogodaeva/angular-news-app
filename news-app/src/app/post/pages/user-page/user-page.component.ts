@@ -19,8 +19,7 @@ export class UserPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = this.route.snapshot.data['user'][0];
-    this.posts = this.route.snapshot.data['user'][1];
+    [this.user, this.posts] = this.route.snapshot.data['user'];
   }
 
   onBack() {
